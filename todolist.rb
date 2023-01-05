@@ -70,10 +70,12 @@ class TodoList
   end
 
   def to_s
-    output = "___ Your To Do List ___\n"
+    output = "---- Today's Todos ----\n"
+    tasks = []
     todos.each do |x|
-      output += "#{x}\n"
+      tasks << x
     end
+    output += tasks.map { |x| "#{x}" }.join("\n")
     output
   end
 

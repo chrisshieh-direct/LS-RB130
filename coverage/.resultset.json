@@ -1,0 +1,23 @@
+{
+  "Minitest": {
+    "coverage": {
+      "/Users/gracie/Programming/LS-RB130/cat.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          4,
+          4,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1672948358
+  }
+}

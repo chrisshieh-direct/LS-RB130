@@ -1,27 +1,40 @@
-def bubble_sort!(array)
-  loop do
-    swapped = false
-    1.upto(array.size - 1) do |index|
-      first = array[index - 1]
-      second = array[index]
-      if block_given?
-        next if yield(first) <= yield(second)
-      else
-        next if first <= second
-      end
-      first, second = second, first
-      array[index - 1], array[index] = array[index], array[index - 1]
-      swapped = true
-    end
+# # Group 1
+# my_proc = proc { |thing| puts "This is a #{thing}." }
+# puts my_proc
+# puts my_proc.class
+# my_proc.call
+# my_proc.call('cat')
 
-    break unless swapped
-  end
-end
+# First it puts the proc object, then the class of the proc with is a Proc.
+# Then we call the proc (chunk of code) with no argument. Arity is lenient so no error
+# is thrown, but there is no string passed so it outputs 'This is a .'
+# Finally we call the proc with a string which outputs "This is a cat."
 
-array = [5, 3]
-bubble_sort!(array)
-p array == [3, 5]
+# # Group 2
+my_lambda = lambda { |thing| puts "This is a #{thing}." }
+my_second_lambda = -> (thing) { puts "This is a #{thing}." }
+puts my_lambda
+puts my_second_lambda
+puts my_lambda.class
+my_lambda.call('dog')
+my_lambda.call
+my_third_lambda = Lambda.new { |thing| puts "This is a #{thing}." }
 
-array = %w(sue Pete alice Tyler rachel Kim bonnie)
-bubble_sort!(array) { |value| value.downcase }
-p array == %w(alice bonnie Kim Pete rachel sue Tyler)
+# # Group 3
+# def block_method_1(animal)
+#   yield
+# end
+
+# block_method_1('seal') { |seal| puts "This is a #{seal}."}
+# block_method_1('seal')
+
+# # Group 4
+# def block_method_2(animal)
+#   yield(animal)
+# end
+
+# block_method_2('turtle') { |turtle| puts "This is a #{turtle}."}
+# block_method_2('turtle') do |turtle, seal|
+#   puts "This is a #{turtle} and a #{seal}."
+# end
+# block_method_2('turtle') { puts "This is a #{animal}."}

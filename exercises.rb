@@ -1,42 +1,27 @@
-def each_cons(arr, num)
-  return arr unless block_given?
-  arr.each_with_index do |item, idx|
-    next if idx + num > arr.length
-    give = []
-    num.times do |x|
-      give << arr[idx + x]
+def bubble_sort!(array)
+  loop do
+    swapped = false
+    1.upto(array.size - 1) do |index|
+      first = array[index - 1]
+      second = array[index]
+      if block_given?
+        next if yield(first) <= yield(second)
+      else
+        next if first <= second
+      end
+      first, second = second, first
+      array[index - 1], array[index] = array[index], array[index - 1]
+      swapped = true
     end
-    yield(*give)
+
+    break unless swapped
   end
-  arr
 end
 
-hash = {}
-each_cons([1, 3, 6, 10], 1) do |value|
-  hash[value] = true
-end
-p hash == { 1 => true, 3 => true, 6 => true, 10 => true }
+array = [5, 3]
+bubble_sort!(array)
+p array == [3, 5]
 
-hash = {}
-each_cons([1, 3, 6, 10], 2) do |value1, value2|
-  hash[value1] = value2
-end
-p hash  == { 1 => 3, 3 => 6, 6 => 10 }
-
-hash = {}
-each_cons([1, 3, 6, 10], 3) do |value1, *values|
-  hash[value1] = values
-end
-p hash  == { 1 => [3, 6], 3 => [6, 10] }
-
-hash = {}
-each_cons([1, 3, 6, 10], 4) do |value1, *values|
-  hash[value1] = values
-end
-p hash  == { 1 => [3, 6, 10] }
-
-hash = {}
-each_cons([1, 3, 6, 10], 5) do |value1, *values|
-  hash[value1] = values
-end
-p hash  == {}
+array = %w(sue Pete alice Tyler rachel Kim bonnie)
+bubble_sort!(array) { |value| value.downcase }
+p array == %w(alice bonnie Kim Pete rachel sue Tyler)
